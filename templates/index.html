@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DoToday</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+        <link rel="icon" href="https://img.icons8.com/clouds/2x/todo-list.png">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="wrapped-item left">
+                <div>
+                    <div>Overdue</div>
+                    <div>Today</div>
+                    <div>Tomorrow</div>
+                    <div>Upcoming</div>
+                </div>
+                <div>
+                    <h3>Collections</h3>
+                    {% for collection_item in collections %}
+                        <a href="/{{ collection_item }}">{{ collection_item }}</a>
+                        <br>
+                    {% endfor %}
+                </div>
+                <div>
+                    <a href="/completed">Completed</a>
+                    <a href="/trash">Trash</a>
+                </div>
+            </div>
+            <div class="wrapped-item center">
+                <a href="/">
+                    <div class="logo">
+                        <img src="https://img.icons8.com/clouds/2x/todo-list.png">
+                        <h1>DoToday</h1>
+                    </div>
+                </a>
+                <div>
+                    <form action="/add" method="post">
+                        <input type="text" required name="title" placeholder="Enter Task">
+                        <input type="text" name="collection" placeholder="Enter Collection">
+                        <button type="submit">+</button>
+                    </form>
+                    {% for todo in todo_list %}
+                        <p>{{ todo.id }} | {{ todo.title }} | {{ todo.date }}</p>
+
+                        {% if todo.complete==False %}
+                            <span">Not Completed</span>
+                            {% else %}
+                            <span">Completed</span>
+                        {% endif %}
+
+                        <a href="/update?id={{ todo.id }}">Update</a>
+                        {% if todo.deleted==False %}
+                            <a href="/delete?id={{ todo.id }}">Delete</a>
+                        {% else %}
+                            <a href="/restore?id={{ todo.id }}">Restore</a>
+                            <a href="/permanentdelete?id={{ todo.id }}">Permanent Delete</a>
+                        {% endif %}    
+                    {% endfor %}
+                </div>
+            </div>
+         
+        </div>
+    </body>
+</html>
