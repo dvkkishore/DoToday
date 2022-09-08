@@ -9,10 +9,10 @@
         <div class="wrapper">
             <div class="wrapped-item left">
                 <div>
-                    <div>Overdue</div>
-                    <div>Today</div>
-                    <div>Tomorrow</div>
-                    <div>Upcoming</div>
+                    <a href="/overdue">Overdue</a>
+                    <a href="/today">Today</a>
+                    <a href="/tomorrow">Tomorrow</a>
+                    <a href="/upcoming">Upcoming</a>
                 </div>
                 <div>
                     <h3>Collections</h3>
@@ -38,6 +38,7 @@
                         <input type="text" required name="title" placeholder="Enter Task">
                         <input type="text" name="collection" placeholder="Enter Collection">
                         <button type="submit">+</button>
+                        <input type="date" required name="date">
                     </form>
                     {% for todo in todo_list %}
                         <p>{{ todo.id }} | {{ todo.title }} | {{ todo.date }}</p>
