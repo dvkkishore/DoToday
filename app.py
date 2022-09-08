@@ -30,7 +30,6 @@ def get_collection_data():
     return list(set(collections))
 
 @app.route('/')
-
 def index():
     todo_list = ToDo.query.filter_by( deleted = False)
     return render_template("index.html", todo_list = todo_list, collections = get_collection_data())
